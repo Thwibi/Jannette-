@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class GeoLocationUtil {
 
-    private static final String API_KEY = "YOUR_OPENCAGE_API_KEY";
+    private static final String API_KEY = "5a35326fa5a144959b7a985de8427faa";
 
     public static double[] getCoordinates(String city) throws IOException {
         String url = "https://api.opencagedata.com/geocode/v1/json?q=" + city + "&key=" + API_KEY;
