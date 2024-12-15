@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.image.*?>
-
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
     <TextField fx:id="cityField" promptText="Enter your birth city" />
     <Button fx:id="fetchButton" text="Fetch Moon Phase" onAction="#fetchMoonPhase" />
+    <TextField fx:id="dateField" promptText="Enter your birth date (yyyy-mm-dd)" />
+    <Button text="Get Zodiac Info" onAction="#calculateZodiacSign" />
+    <Label fx:id="zodiacSignLabel" text="Zodiac Sign: N/A" />
+    <Label fx:id="zodiacElementLabel" text="Element: N/A" />
+    <Label fx:id="zodiacSymbolLabel" text="Symbol: N/A" />
     <ImageView fx:id="moonImageView" fitWidth="300" fitHeight="300" />
 </VBox>
