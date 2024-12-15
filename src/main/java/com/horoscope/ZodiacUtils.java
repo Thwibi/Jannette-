@@ -4,74 +4,62 @@ import java.time.LocalDate;
 
 public class ZodiacUtils {
 
-    /**
-     * Get the Zodiac sign based on the birth date.
-     *
-     * @param date The birth date.
-     * @return The Zodiac sign.
-     */
-    public static String getZodiacSign(LocalDate date) {
-        if (isWithinRange(date, 3, 21, 4, 19)) return "Aries";
-        if (isWithinRange(date, 4, 20, 5, 20)) return "Taurus";
-        if (isWithinRange(date, 5, 21, 6, 20)) return "Gemini";
-        if (isWithinRange(date, 6, 21, 7, 22)) return "Cancer";
-        if (isWithinRange(date, 7, 23, 8, 22)) return "Leo";
-        if (isWithinRange(date, 8, 23, 9, 22)) return "Virgo";
-        if (isWithinRange(date, 9, 23, 10, 22)) return "Libra";
-        if (isWithinRange(date, 10, 23, 11, 21)) return "Scorpio";
-        if (isWithinRange(date, 11, 22, 12, 21)) return "Sagittarius";
-        if (isWithinRange(date, 12, 22, 1, 19)) return "Capricorn";
-        if (isWithinRange(date, 1, 20, 2, 18)) return "Aquarius";
-        if (isWithinRange(date, 2, 19, 3, 20)) return "Pisces";
-        return "Unknown";
+    public static String getZodiacSign(int day, int month) {
+        switch (month) {
+            case 1:  return (day <= 19) ? "Capricorn" : "Aquarius";
+            case 2:  return (day <= 18) ? "Aquarius" : "Pisces";
+            case 3:  return (day <= 20) ? "Pisces" : "Aries";
+            case 4:  return (day <= 19) ? "Aries" : "Taurus";
+            case 5:  return (day <= 20) ? "Taurus" : "Gemini";
+            case 6:  return (day <= 20) ? "Gemini" : "Cancer";
+            case 7:  return (day <= 22) ? "Cancer" : "Leo";
+            case 8:  return (day <= 22) ? "Leo" : "Virgo";
+            case 9:  return (day <= 22) ? "Virgo" : "Libra";
+            case 10: return (day <= 22) ? "Libra" : "Scorpio";
+            case 11: return (day <= 21) ? "Scorpio" : "Sagittarius";
+            case 12: return (day <= 21) ? "Sagittarius" : "Capricorn";
+            default: return "Unknown";
+        }
     }
 
-    /**
-     * Helper function to check if a date falls within a range.
-     */
-    private static boolean isWithinRange(LocalDate date, int startMonth, int startDay, int endMonth, int endDay) {
-        int year = date.getYear();
-        LocalDate startDate = LocalDate.of(year, startMonth, startDay);
-        LocalDate endDate = (endMonth < startMonth) ?
-                LocalDate.of(year + 1, endMonth, endDay) : LocalDate.of(year, endMonth, endDay);
-
-        return (date.isEqual(startDate) || date.isAfter(startDate)) && (date.isEqual(endDate) || date.isBefore(endDate));
-    }
-
-    /**
-     * Get the ruling planet based on the Zodiac sign.
-     *
-     * @param zodiacSign The Zodiac sign.
-     * @return The ruling planet.
-     */
-    public static String getRulingPlanet(String zodiacSign) {
+    public static String getZodiacElement(String zodiacSign) {
         switch (zodiacSign) {
             case "Aries":
-                return "Mars";
-            case "Taurus":
-                return "Venus";
-            case "Gemini":
-                return "Mercury";
-            case "Cancer":
-                return "Moon";
             case "Leo":
-                return "Sun";
-            case "Virgo":
-                return "Mercury";
-            case "Libra":
-                return "Venus";
-            case "Scorpio":
-                return "Pluto (Modern) / Mars (Traditional)";
             case "Sagittarius":
-                return "Jupiter";
+                return "Fire";
+            case "Taurus":
+            case "Virgo":
             case "Capricorn":
-                return "Saturn";
+                return "Earth";
+            case "Gemini":
+            case "Libra":
             case "Aquarius":
-                return "Uranus (Modern) / Saturn (Traditional)";
+                return "Air";
+            case "Cancer":
+            case "Scorpio":
             case "Pisces":
-                return "Neptune (Modern) / Jupiter (Traditional)";
+                return "Water";
             default:
                 return "Unknown";
+        }
+    }
+
+    public static String getZodiacSymbol(String zodiacSign) {
+        switch (zodiacSign) {
+            case "Aries":        return "♈";
+            case "Taurus":       return "♉";
+            case "Gemini":       return "♊";
+            case "Cancer":       return "♋";
+            case "Leo":          return "♌";
+            case "Virgo":        return "♍";
+            case "Libra":        return "♎";
+            case "Scorpio":      return "♏";
+            case "Sagittarius":  return "♐";
+            case "Capricorn":    return "♑";
+            case "Aquarius":     return "♒";
+            case "Pisces":       return "♓";
+            default:             return "?";
         }
     }
 }
