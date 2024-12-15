@@ -1,30 +1,29 @@
-package com.horoscope;
+@FXML
+private TextField dateField; // Input for birthdate (yyyy-mm-dd format)
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
+@FXML
+private Label zodiacSignLabel; // To display the zodiac sign
 
-public class UIController {
-    @FXML
-    private TextField cityField;
-    @FXML
-    private Button fetchButton;
-    @FXML
-    private ImageView moonImageView;
+@FXML
+private Label zodiacElementLabel; // To display the zodiac element
 
-    @FXML
-    public void fetchMoonPhase() {
-        try {
-            String cityName = cityField.getText();
-            double[] coordinates = CityToCoordinates.getCoordinates(cityName);
-            String imageUrl = AstronomyAPI.fetchMoonPhaseImage(coordinates[0], coordinates[1], "1997-04-23");
+@FXML
+private Label zodiacSymbolLabel; // To display the zodiac symbol
 
-            moonImageView.setImage(new Image(imageUrl));
-        } catch (Exception e) {
-            e.printStackTrace();
-            moonImageView.setImage(new Image("/images/default_moon.png"));
-        }
+@FXML
+public void calculateZodiacSign() {
+    try {
+        String[] dateParts = dateField.getText().split("-");
+        int year = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]);
+        int day = Integer.parseInt(dateParts[2]);
+
+        String zodiacSign = ZodiacUtils.getZodiacSign(day, month);
+        zodiacSignLabel.setText("Zodiac Sign: " + zodiacSign);
+        zodiacElementLabel.setText("Element: " + ZodiacUtils.getZodiacElement(zodiacSign));
+        zodiacSymbolLabel.setText("Symbol: " + ZodiacUtils.getZodiacSymbol(zodiacSign));
+
+    } catch (Exception e) {
+        zodiacSignLabel.setText("Error: Invalid date format. Use yyyy-mm-dd.");
     }
 }
